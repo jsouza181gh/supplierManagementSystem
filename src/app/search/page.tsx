@@ -106,6 +106,7 @@ export default function SearchPage() {
       <Header
         onOpenAI={() => setIsAIChatOpen(true)}
         onOpenUser={() => setIsUserModalOpen(true)}
+        onOpenCreateItem={() => alert("Funcionalidade de criação de item ainda não implementada")}
       />
 
       <main className="max-w-7xl mx-auto px-6 py-8">
@@ -121,6 +122,7 @@ export default function SearchPage() {
             {cards.map(card => (
               <ItemCard
                 key={`${card.itemId}-${card.supplier.id}`}
+                itemId={card.itemId}
                 itemName={card.itemName}
                 category={card.category}
                 supplier={card.supplier}
