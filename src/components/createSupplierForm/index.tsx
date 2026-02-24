@@ -275,7 +275,7 @@ export function CreateSupplierForm({ onClose }: CreateSupplierFormProps) {
                     selectedItem?.category || "";
                   setItems(updated);
                 }}
-                className="rounded-xl bg-gray-200 px-4 py-3 text-sm shadow-inner focus:ring-2 focus:ring-blue-800"
+                className="rounded-xl bg-gray-200 px-4 py-3 text-[var(--text-color)] text-sm shadow-inner focus:ring-2 focus:ring-blue-800"
               >
                 <option value="">Selecione o item</option>
                 {itemOptions.map((item) => (

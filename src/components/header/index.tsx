@@ -7,9 +7,10 @@ import Link from "next/link"
 interface HeaderProps {
   onOpenAI: () => void
   onOpenUser: () => void
+  onOpenCreateItem: () => void
 }
 
-export function Header({ onOpenAI, onOpenUser }: HeaderProps) {
+export function Header({ onOpenAI, onOpenUser, onOpenCreateItem }: HeaderProps) {
   const [query, setQuery] = useState("")
   const router = useRouter()
 
@@ -41,7 +42,7 @@ export function Header({ onOpenAI, onOpenUser }: HeaderProps) {
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="O que você está procurando hoje?"
+              placeholder="Qual item você está buscando?"
               className="w-full pl-9 pr-3 py-2 rounded-md bg-[var(--background-color)] text-[var(--text-color)]"
             />
 
@@ -51,6 +52,14 @@ export function Header({ onOpenAI, onOpenUser }: HeaderProps) {
               className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-60 pointer-events-none"
             />
           </form>
+
+          <img
+          src="icone_adicionar_branco.png"
+          alt="Criar novo item"
+          className="h-4 sm:h-6 md:h-8 shrink-0 cursor-pointer"
+          onClick={onOpenCreateItem}
+        />
+
         </div>
 
         <img

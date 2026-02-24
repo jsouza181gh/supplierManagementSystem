@@ -8,6 +8,7 @@ import { CreateSupplierForm } from "@/components/createSupplierForm";
 import { SupplierInfo } from "@/components/supplierInfo";
 import AIChatModal from "@/components/aiAssistant";
 import UserModal from "@/components/userInfo";
+import { CreateItemForm } from "@/components/createItemForm";
 
 interface Item {
   id: string;
@@ -45,6 +46,7 @@ export default function HomePage() {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [isCreateItemOpen, setIsCreateItemOpen] = useState(false)
 
   const totalPages = Math.ceil(total / limit);
 
@@ -95,6 +97,7 @@ export default function HomePage() {
       <Header
         onOpenAI={() => setIsAIChatOpen(true)}
         onOpenUser={() => setIsUserModalOpen(true)}
+        onOpenCreateItem={() => setIsCreateItemOpen(true)}
       />
 
       <main>
@@ -222,6 +225,11 @@ export default function HomePage() {
         {isUserModalOpen && (
           <UserModal onClose={() => setIsUserModalOpen(false)} />
         )}
+
+        {isCreateItemOpen && (
+        <CreateItemForm onClose={() => setIsCreateItemOpen(false)} />
+        )}
+        
       </main>
     </>
   );

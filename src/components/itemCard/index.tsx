@@ -10,17 +10,52 @@ interface Supplier {
 }
 
 interface ItemCardProps {
+  itemId: string
   itemName: string
   category: string
   supplier: Supplier
 }
 
 export function ItemCard({
+  itemId,
   itemName,
   category,
   supplier,
 }: ItemCardProps) {
 
+  async function handleDeleteItem() {
+  const confirmDelete = confirm(
+    "Tem certeza que deseja excluir este item?"
+  )
+
+  if (!confirmDelete) return
+
+  try {
+    const token = localStorage.getItem("token")
+
+    const response = await fetch(
+      `http://localhost:5000/items/${itemId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error("Erro ao excluir item")
+    }
+
+    alert("Item excluído com sucesso")
+    // aqui você pode:
+    // - remover o item da lista
+    // - ou dar refresh na página
+  } catch (error) {
+    console.error(error)
+    alert("Erro ao excluir item")
+  }
+}
   return (
     <div className="w-72 bg-[var(--background-color)] rounded-lg shadow-md overflow-hidden">
 
@@ -29,15 +64,20 @@ export function ItemCard({
           {itemName}
         </h2>
 
-        <img
-          src={
-            supplier.isPreferred
-              ? "estrela_dourada.png"
-              : "estrela_apagada.png"
-          }
-          alt="Favorito"
-          className="w-5 h-5"
-        />
+        <div className="flex items-center gap-2">
+
+          <button
+            onClick={handleDeleteItem}
+            className="p-1 rounded-md transition cursor-pointer"
+            title="Excluir item"
+          >
+            <img
+              src="icone_lixo.png"
+              alt="Excluir item"
+              className="w-4 h-4"
+            />
+          </button>
+        </div>
       </div>
 
       <div className="px-4 py-3 text-sm text-[var(--text-color)] space-y-2">
